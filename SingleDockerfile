@@ -1,0 +1,23 @@
+FROM python:3.6
+ENV PYTHONUNBUFFERED=1
+
+# Copy files and set working directory
+COPY flask-api/ /usr/src/app
+COPY flask-api/api/* /usr/src/app/api/
+COPY flask-api/api/*.py /usr/src/app/
+WORKDIR /usr/src/app
+
+# Copy requirements file and install dependencies
+COPY flask-api/requirements.txt /wheels/requirements.txt
+RUN echo "pylint==2.4.4" >> /wheels/requirements.txt
+RUN pip install -r /wheels/requirements.txt
+
+# Run Pylint
+COPY flask-api/pylint.cfg /etc/pylint.cfg
+RUN pylint --rcfile=/etc/pylint.cfg .
+
+# Run Unit tests
+RUN make test
+
+# Run the app
+CMD ["python", "run_app.py"]
