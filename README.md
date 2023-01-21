@@ -1,13 +1,11 @@
-# MULTISTAGE BUILD 
-#### Docker container pipelines 
+# DOCKERS WORKSHOP:
+#Built images:  
+Single rzlinux0/dev:single  
+Multi  rzlinux0/prod:multi
 
-The application we are using as a POC can be downloaded from:  https://github.com/rmotr/flask-api-example
+```docker run -p <YourPort>:8080 <IMAGE>```
 
-##### Running tests and validation in the applicaiton
-
-
-We are going to build this application inside a docker container and run:
-1. Code analysis
-2. Unit tests
-3. SonarQube for security check
-
+#Dockerfiles to build:
+SingleStage - https://github.com/XXcage/flask/blob/main/SingleDockerfile  
+MultiStage  - requires: https://github.com/XXcage/flask/blob/main/docker-compose.yml and ```docker-compose up```  
+then https://github.com/XXcage/flask/blob/main/Dockerfile
